@@ -7,6 +7,7 @@ import Recent from "./Recent";
 export class Weather extends Component {
   constructor(props) {
     super(props);
+    // Initialize state variables
     this.state = {
       lat: "",
       lon: "",
@@ -16,31 +17,25 @@ export class Weather extends Component {
       recent: [],
     };
   }
+
+  // Handler for input field changes
   inputChangeHandler = (e) => {
-    //alert('njdj')
     const name = e.target.name;
-    //console.log("e.target.name");
     if (name === "city") {
-      this.setState({
-        city: e.target.value,
-      });
+      this.setState({ city: e.target.value });
     } else if (name === "lat") {
-      this.setState({
-        lat: e.target.value,
-      });
+      this.setState({ lat: e.target.value });
     } else if (name === "lon") {
-      this.setState({
-        lon: e.target.value,
-      });
+      this.setState({ lon: e.target.value });
     } else {
       console.log("Name Not Valid");
     }
   };
 
+  // Handler for search button click
   searchHandler = (e) => {
     e.preventDefault();
-    //  alert("vhbhbuj")
-
+    // Make API call to get weather data based on latitude and longitude
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&appid=e1ca02e40c57a7fded0ee1966deadf0c`
@@ -53,7 +48,7 @@ export class Weather extends Component {
             weatherData: res.data,
           },
           () => {
-            this.recentDataHandler();
+            this.recentDataHandler(); // Update recent data list
           }
         );
       })
@@ -61,12 +56,12 @@ export class Weather extends Component {
         console.log(err);
       });
   };
+
+  // Handler for getting weather data based on the user's current location
   locationHandler = (e) => {
     e.preventDefault();
-    //alert("buguj")
-    this.setState({
-      loading: true,
-    });
+    this.setState({ loading: true });
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (res) => {
@@ -89,7 +84,7 @@ export class Weather extends Component {
                     loading: false,
                   },
                   () => {
-                    this.recentDataHandler();
+                    this.recentDataHandler(); // Update recent data list
                   }
                 );
               })
@@ -102,28 +97,26 @@ export class Weather extends Component {
           console.log(err);
         }
       );
-    } else{
-      console.log("geolocation not support....");
+    } else {
+      console.log("Geolocation not supported");
     }
   };
 
+  // Handler to update the list of recent searches
   recentDataHandler = () => {
-    const Recent = this.state.recent;
-    console.log(Recent);
-    Recent.push({
+    const recent = this.state.recent;
+    recent.push({
       city: this.state.city,
       lat: this.state.lat,
-      lon:this.state.lon
+      lon: this.state.lon,
     });
-    this.setState({ Recent });
+    this.setState({ recent });
   };
 
-  reserchHandler = (lat,lon) => {
-   // alert("hvhb");
-    this.setState({
-      lat: lat,
-      lon: lon,
-    });
+  // Handler for searching weather data based on latitude and longitude
+  reserchHandler = (lat, lon) => {
+    this.setState({ lat, lon });
+
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=e1ca02e40c57a7fded0ee1966deadf0c`
@@ -152,15 +145,15 @@ export class Weather extends Component {
           change={this.inputChangeHandler}
           location={this.locationHandler}
           search={this.searchHandler}
-        ></Search>
+        />
         <Result
           loading={this.state.loading}
           weatherData={this.state.weatherData}
-        ></Result>
+        />
         <Recent
           recent={this.state.recent}
           research={this.reserchHandler}
-        ></Recent>
+        />
       </div>
     );
   }

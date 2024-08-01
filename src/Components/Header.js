@@ -1,24 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 export class Header extends Component {
   render() {
     return (
       <div>
-                <section className=" header position-sticky top-0 bg-white">
+        {/* Header section with sticky positioning */}
+        <section className="header position-sticky top-0 bg-white">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
               <div className="row">
-                <div className="col-10 ">
+                {/* Logo and navbar toggle button */}
+                <div className="col-10">
                   <img
-                    src="asset/logo.jpg"
-                    alt="img"
-                    style={{ width: "24%" }}
+                    src="asset/logo.jpg"  // Logo image source
+                    alt="img"  // Alt text for accessibility
+                    style={{ width: "24%" }}  // Inline style for logo width
                   ></img>
                 </div>
                 <div className="col-2">
+                  {/* Navbar toggle button for collapsing on smaller screens */}
                   <button
-                    className="navbar-toggler float-end "
+                    className="navbar-toggler float-end"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
@@ -31,14 +34,16 @@ export class Header extends Component {
                 </div>
               </div>
 
+              {/* Collapsible navbar content */}
               <div
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               >
+                {/* Navigation links */}
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
                     <Link
-                      className="nav-link active "
+                      className="nav-link active"
                       aria-current="page"
                       to="/"
                     >
@@ -47,7 +52,7 @@ export class Header extends Component {
                   </li>
                   <li className="nav-item">
                     <Link
-                      className="nav-link "
+                      className="nav-link"
                       aria-current="page"
                       to="/weather"
                     >
@@ -56,7 +61,8 @@ export class Header extends Component {
                   </li>
                 </ul>
 
-                <div className="container ">
+                {/* Search form */}
+                <div className="container">
                   <form className="d-flex">
                     <input
                       className="form-control me-2"
@@ -74,8 +80,8 @@ export class Header extends Component {
           </nav>
         </section>
       </div>
-    )
+    );
   }
 }
 
-export default Header
+export default Header;
