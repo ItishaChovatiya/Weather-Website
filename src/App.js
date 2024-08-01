@@ -2,18 +2,22 @@ import React, { Component } from "react";
 import Header from "./Components/Header";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
-
 import Weather from "./Pages/Weather";
-//import Loader from "./Components/Loader";
 
 export class App extends Component {
   render() {
     return (
       <div>
-        <Header></Header>
+        {/* Render the Header component */}
+        <Header />
+
+        {/* Set up routing using react-router-dom */}
         <Routes>
-          <Route path="/" element={<Home></Home>}></Route>
-          <Route path="/weather" element={<Weather></Weather>}></Route>
+          {/* Route for the Home page */}
+          <Route path="/" element={<Home />} />
+          
+          {/* Route for the Weather page */}
+          <Route path="/weather" element={<Weather />} />
         </Routes>
       </div>
     );
